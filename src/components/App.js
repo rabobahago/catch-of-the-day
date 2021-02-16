@@ -47,12 +47,25 @@ class App extends React.Component {
   componentWillUnmount() {
     base.removeBinding(this.ref)
   }
+  removeFish = (key) => {
+    const fishes = { ...this.state.fishes }
+
+    fishes[key] = null
+    this.setState({ fishes })
+  }
+  removeOrder = (key) => {
+    const order = { ...this.state.order }
+    delete order[key]
+    this.setState({ order })
+  }
+
   addFish = (fish) => {
     const fishes = { ...this.state.fishes }
     const timestamp = Date.now()
     fishes[`fish-${timestamp}`] = fish
     this.setState({ fishes })
   }
+
   addToOrder = (key) => {
     const order = { ...this.state.order }
     order[key] = order[key] + 1 || 1
@@ -77,8 +90,17 @@ class App extends React.Component {
             ))}
           </ul>
         </div>
-        <Order fishes={this.state.fishes} order={this.state.order} />
-        <Inventory loadSamples={this.loadSamples} addFish={this.addFish} />
+        <Order
+          fishes={this.state.fishes}
+          order={this.state.order}
+          removeOrder={this.removeOrder}
+        />
+        <Inventory
+          loadSamples={this.loadSamples}
+          addFish={this.addFish}
+          removeFish={this.removeFish}
+          fishes={this.state.fishes}
+        />
       </div>
     )
   }

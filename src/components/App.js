@@ -96,7 +96,7 @@ class App extends React.Component {
           removeOrder={this.removeOrder}
         />
         <Inventory
-          loadSamples={this.loadSamples}
+          loadSamples={this.loadSamplesFishes}
           addFish={this.addFish}
           removeFish={this.removeFish}
           fishes={this.state.fishes}
